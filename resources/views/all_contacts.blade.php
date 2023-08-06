@@ -23,7 +23,7 @@
                         <td>${{ $contact->created_at }}</td>
                         <td>
                             <a class="btn btn-danger" href="{{ route('delete_contact', ['contact' => $contact->id]) }}">Delete</a>
-                            <a class="btn btn-primary" href="">Edit</a>
+                            <a class="btn btn-primary" href="{{ route('edit_contact', ['contact' => $contact->id]) }}">Edit</a>
                         </td>
                     </tr>
                 @endforeach

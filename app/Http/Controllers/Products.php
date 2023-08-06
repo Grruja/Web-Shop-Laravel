@@ -7,14 +7,6 @@ use Illuminate\Http\Request;
 
 class Products extends Controller
 {
-    public function all_products()
-    {
-        $products = Products_model::all();
-
-        return view('all_products', compact('products'));
-    }
-
-
     public function save_product(Request $request)
     {
         $request->validate([
@@ -36,6 +28,12 @@ class Products extends Controller
         return redirect()->route('all_products');
     }
 
+    public function all_products()
+    {
+        $products = Products_model::all();
+
+        return view('all_products', compact('products'));
+    }
 
     public function edit_product(Products_model $product)
     {

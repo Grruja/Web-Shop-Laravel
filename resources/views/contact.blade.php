@@ -19,7 +19,16 @@
                 </iframe>
             </div>
 
-            <form class="ms-lg-5 w-100 mt-lg-0 mt-4">
+            <form method="POST" action="{{ route('save_contact') }}" class="ms-lg-5 w-100 mt-lg-0 mt-4">
+
+                {{ csrf_field() }}
+
+                @if($errors->any())
+                    @foreach($errors->all() as $error)
+                        <p class="text-danger">{{ $error }}</p>
+                    @endforeach
+                @endif
+
                 <label for="email" class="form-label">Email</label>
                 <input type="email" name="email" class="form-control" id="email">
 

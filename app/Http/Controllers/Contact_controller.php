@@ -12,18 +12,12 @@ class contact_controller extends Controller
         return view('contact');
     }
 
-    public function get_all_contacts()
-    {
-        $all_contacts = Contact_model::all(); // SELECT * FROM contact
-        return view('all_contacts', compact('all_contacts'));
-    }
-
-    public function  send_contact(Request $request)
+    public function  save_contact(Request $request)
     {
         $request->validate([
-            'email' => 'required|string',
+            'email' => 'required|string|email|unique:contact',
             'subject' => 'required|string',
-            'message' => 'required|string|min:5',
+            'message' => 'required|string|max:255',
         ]);
 
         echo 'Email: '.$request->get('email').' Title: '.$request->get('subject').' Message: '.$request->get('message');
@@ -37,16 +31,34 @@ class contact_controller extends Controller
         return redirect('/shop');
     }
 
-    public function delete_contact($contact)
+    public function all_contacts()
     {
-        $single_contact = Contact_model::where(['id' => $contact])->first();
+        $all_contacts = Contact_model::all();
+        return view('all_contacts', compact('all_contacts'));
+    }
 
-        if ($single_contact === null)
-        {
-            die('Contact not found');
-        }
+    public function edit_contact(Contact_model $contact)
+    {
+        return view('contacts.edit_contact', compact('contact'));
+    }
 
-        $single_contact->delete();
+    public function  update_contact(Request $request, Contact_model $contact)
+    {
+        $request->validate([
+            'email' => 'required|string|email|unique:contact,email,'.$contact->id,
+            'subject' => 'required|string',
+        ]);
+
+        $contact->email = $request->get('email');
+        $contact->subject = $request->get('subject');
+        $contact->save();
+
+        return redirect( route('all_contacts') );
+    }
+
+    public function delete_contact(Contact_model $contact)
+    {
+        $contact->delete();
 
         return redirect()->back();
     }
