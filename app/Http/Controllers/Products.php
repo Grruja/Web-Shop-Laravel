@@ -21,7 +21,7 @@ class Products extends Controller
             'name' => 'required|string|min:2',
             'description' => 'required|string|max:255',
             'amount' => 'required|int|min:0',
-            'price' => 'required|numeric|gt:0',
+            'price' => 'required|numeric|between:0,99.99',
             'image' => 'required|string',
         ]);
 
@@ -48,7 +48,7 @@ class Products extends Controller
            'name' => 'required|string|min:2',
            'description' => 'required|string|max:255',
            'amount' => 'required|int|min:0',
-           'price' => 'required|numeric|gt:0',
+           'price' => 'required|numeric|gt:0|between:0,99.99',
            'image' => 'required|string',
         ]);
 

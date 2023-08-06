@@ -21,7 +21,7 @@
             <input type="number" name="amount" value="{{ old('amount') }}" class="form-control" id="amount">
 
             <label for="price" class="form-label">Price</label>
-            <input type="number" name="price" value="{{ old('price') }}" class="form-control" id="price">
+            <input type="text" name="price" value="{{ old('price') }}" class="form-control" id="price">
 
             <label for="image" class="form-label">Image</label>
             <input type="text" name="image" value="{{ old('name') }}" class="form-control" id="image">
