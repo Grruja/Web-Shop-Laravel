@@ -6,7 +6,6 @@ use App\Http\Requests\Save_product_request;
 use App\Http\Requests\Update_product_request;
 use App\Models\Products_model;
 use App\Repository\Product_repository;
-use Illuminate\Http\Request;
 
 class Products extends Controller
 {
@@ -18,7 +17,7 @@ class Products extends Controller
 
     public function save_product(Save_product_request $request) {
         $this->product_repo->create_product($request);
-        return redirect()->route('all_products');
+        return redirect()->route('product.all');
     }
 
     public function all_products() {
@@ -32,7 +31,7 @@ class Products extends Controller
 
     public function update_product(Update_product_request $request, Products_model $product) {
         $this->product_repo->update_product($request, $product);
-        return redirect( route('all_products') );
+        return redirect( route('product.all') );
     }
 
 

@@ -30,28 +30,22 @@ Route::middleware(['auth', Admin_check::class])->prefix('admin')->group(function
 
     // ===== PRODUCT
     Route::view('/add-product', 'add_product');
-    
-    Route::controller(Products::class)->group(function () {
-        Route::post('/save-product', 'save_product')->name('save_product');
 
-        Route::get('/all-products', 'all_products')->name('all_products');
-
-        Route::get('/edit-product/{product}', 'edit_product')->name('edit_product');
-        Route::post('/update-product/{product}', 'update_product')->name('update_product');
-
-        Route::get('/delete-product/{product}', 'delete_product')->name('delete_product');
+    Route::controller(Products::class)->prefix('/product')->name('product.')->group(function () {
+        Route::get('/all', 'all_products')->name('all');
+        Route::get('/edit/{product}', 'edit_product')->name('edit');
+        Route::get('/delete/{product}', 'delete_product')->name('delete');
+        Route::post('/save', 'save_product')->name('save');
+        Route::post('/update/{product}', 'update_product')->name('update');
     });
 
     // ===== CONTACT
-    Route::controller(Contact_controller::class)->group(function () {
-        Route::post('/save-contact', 'save_contact')->name('save_contact');
-
-        Route::get('/all-contacts', 'all_contacts')->name('all_contacts');
-
-        Route::get('/edit-contact/{contact}', 'edit_contact')->name('edit_contact');
-        Route::post('/update-contact/{contact}', 'update_contact')->name('update_contact');
-
-        Route::get('/delete-contact/{contact}', 'delete_contact')->name('delete_contact');
+    Route::controller(Contact_controller::class)->prefix('/contact')->name('contact.')->group(function () {
+        Route::get('/all', 'all_contacts')->name('all');
+        Route::get('/edit/{contact}', 'edit_contact')->name('edit');
+        Route::get('/delete/{contact}', 'delete_contact')->name('delete');
+        Route::post('/save', 'save_contact')->name('save');
+        Route::post('/update/{contact}', 'update_contact')->name('update');
     });
 });
 

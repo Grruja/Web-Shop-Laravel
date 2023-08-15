@@ -2,7 +2,7 @@
 
 @section('page_content')
     <div class="container">
-        <form method="POST" action="{{ route('update_contact', ['contact' => $contact->id]) }}">
+        <form method="POST" action="{{ route('contact.update', ['contact' => $contact->id]) }}">
             {{ csrf_field() }}
 
             @if($errors->any())

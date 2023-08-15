@@ -2,7 +2,7 @@
 
 @section('page_content')
     <div class="container">
-        <form method="POST" action="{{ route('save_product') }}">
+        <form method="POST" action="{{ route('product.save') }}">
             {{ csrf_field() }}
 
             @if($errors->any())

@@ -42,7 +42,7 @@ class Contact_controller extends Controller
         ]);
 
         $this->contact_repo->update_contact($request, $contact);
-        return redirect( route('all_contacts') );
+        return redirect( route('contact.all') );
     }
 
     public function delete_contact(Contact_model $contact) {

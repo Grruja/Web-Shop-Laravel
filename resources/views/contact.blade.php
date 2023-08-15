@@ -19,7 +19,7 @@
                 </iframe>
             </div>
 
-            <form method="POST" action="{{ route('save_contact') }}" class="ms-lg-5 w-100 mt-lg-0 mt-4">
+            <form method="POST" action="{{ route('contact.save') }}" class="ms-lg-5 w-100 mt-lg-0 mt-4">
 
                 {{ csrf_field() }}
 

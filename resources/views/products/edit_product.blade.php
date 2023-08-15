@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('page_content')
-    <form action="{{ route('update_product', ['product' => $product->id]) }}" method="POST" class="container">
+    <form action="{{ route('product.update', ['product' => $product->id]) }}" method="POST" class="container">
 
         {{ csrf_field() }}
 
