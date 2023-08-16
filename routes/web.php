@@ -23,31 +23,36 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [welcome_controller::class, 'index']);
 Route::get('/shop', [shop_controller::class, 'index']);
 Route::view('/about', 'about');
-Route::get('/contact', [contact_controller::class, 'index']);
+Route::get('/contact', [Contact_controller::class, 'index']);
 
 
 Route::middleware(['auth', Admin_check::class])->prefix('admin')->group(function() {
 
     // ===== PRODUCT
     Route::view('/add-product', 'add_product');
-    Route::post('/save-product', [Products::class, 'save_product'])->name('save_product');
+    
+    Route::controller(Products::class)->group(function () {
+        Route::post('/save-product', 'save_product')->name('save_product');
 
-    Route::get('/all-products', [Products::class, 'all_products'])->name('all_products');
+        Route::get('/all-products', 'all_products')->name('all_products');
 
-    Route::get('/edit-product/{product}', [Products::class, 'edit_product'])->name('edit_product');
-    Route::post('/update-product/{product}', [Products::class, 'update_product'])->name('update_product');
+        Route::get('/edit-product/{product}', 'edit_product')->name('edit_product');
+        Route::post('/update-product/{product}', 'update_product')->name('update_product');
 
-    Route::get('/delete-product/{product}', [Products::class, 'delete_product'])->name('delete_product');
+        Route::get('/delete-product/{product}', 'delete_product')->name('delete_product');
+    });
 
     // ===== CONTACT
-    Route::post('/save-contact', [contact_controller::class, 'save_contact'])->name('save_contact');
+    Route::controller(Contact_controller::class)->group(function () {
+        Route::post('/save-contact', 'save_contact')->name('save_contact');
 
-    Route::get('/all-contacts', [contact_controller::class, 'all_contacts'])->name('all_contacts');
+        Route::get('/all-contacts', 'all_contacts')->name('all_contacts');
 
-    Route::get('/edit-contact/{contact}', [contact_controller::class, 'edit_contact'])->name('edit_contact');
-    Route::post('/update-contact/{contact}', [contact_controller::class, 'update_contact'])->name('update_contact');
+        Route::get('/edit-contact/{contact}', 'edit_contact')->name('edit_contact');
+        Route::post('/update-contact/{contact}', 'update_contact')->name('update_contact');
 
-    Route::get('/delete-contact/{contact}', [contact_controller::class, 'delete_contact'])->name('delete_contact');
+        Route::get('/delete-contact/{contact}', 'delete_contact')->name('delete_contact');
+    });
 });
 
 
