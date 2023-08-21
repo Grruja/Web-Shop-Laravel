@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Save_contact_request;
+use App\Http\Requests\Update_contact_requ;
 use App\Models\Contact_model;
 use App\Repository\Contact_repository;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class Contact_controller extends Controller
         return view('contacts.edit_contact', compact('contact'));
     }
 
-    public function  update_contact(Request $request, Contact_model $contact) {
+    public function  update_contact(Update_contact_requ $request, Contact_model $contact) {
         $request->validate([
             'email' => 'required|string|email|unique:contact,email,'.$contact->id,
             'subject' => 'required|string',

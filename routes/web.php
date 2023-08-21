@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Cart_controller;
 use App\Http\Controllers\contact_controller;
 use App\Http\Controllers\Products;
 use App\Http\Controllers\ProfileController;
@@ -25,9 +26,12 @@ Route::get('/shop', [shop_controller::class, 'index']);
 Route::view('/about', 'about');
 Route::get('/contact', [Contact_controller::class, 'index']);
 
+Route::get('/product/{product}', [Products::class, 'permalink'])->name('permalink');
+
+Route::get('/cart', [Cart_controller::class, 'cart'])->name('cart');
+Route::post('/product/add', [Cart_controller::class, 'add_to_cart'])->name('cart.add');
 
 Route::middleware(['auth', Admin_check::class])->prefix('admin')->group(function() {
-
     // ===== PRODUCT
     Route::view('/add-product', 'add_product');
 

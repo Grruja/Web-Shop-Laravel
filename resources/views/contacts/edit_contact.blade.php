@@ -11,6 +11,8 @@
                 @endforeach
             @endif
 
+            <input type="hidden" name="id" value="{{ $contact->id }}">
+
             <label for="email" class="form-label">Email</label>
             <input type="email" name="email" value="{{ $contact->email }}" class="form-control" id="email">
 

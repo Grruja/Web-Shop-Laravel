@@ -25,6 +25,10 @@ class Products extends Controller
         return view('all_products', compact('products'));
     }
 
+    public function permalink(Products_model $product) {
+        return view('products.product_page', compact('product'));
+    }
+
     public function edit_product(Products_model $product) {
         return view('products.edit_product', compact('product'));
     }
