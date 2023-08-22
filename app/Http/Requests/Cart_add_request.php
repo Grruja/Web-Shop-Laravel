@@ -23,7 +23,7 @@ class Cart_add_request extends FormRequest
     {
         return [
             'id' => 'required|exists:products,id',
-            'amount' => 'required|min:1',
+            'amount' => 'required|numeric|min:1',
         ];
     }
 }
