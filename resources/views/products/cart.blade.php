@@ -7,8 +7,13 @@
             <p>Price: ${{ $product['price'] }}</p>
             <p>Amount: {{ $product['amount'] }}</p>
             <p>Total price: ${{ $product['total'] }}</p>
+            @if ($errors->any())
+                <p>{{ $errors->first() }}</p>
+            @endif
         </div>
         <hr>
     @endforeach
+
+    <a href="{{ route('cart.finish') }}">BUY</a>
 </div>
 

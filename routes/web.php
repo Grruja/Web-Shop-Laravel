@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\shop_controller;
 use App\Http\Controllers\welcome_controller;
 use App\Http\Middleware\Admin_check;
+use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,8 +29,11 @@ Route::get('/contact', [Contact_controller::class, 'index']);
 
 Route::get('/product/{product}', [Products::class, 'permalink'])->name('permalink');
 
-Route::get('/cart', [Cart_controller::class, 'cart'])->name('cart');
-Route::post('/product/add', [Cart_controller::class, 'add_to_cart'])->name('cart.add');
+Route::middleware(['auth', Authenticate::class])->group(function () {
+    Route::get('/cart', [Cart_controller::class, 'cart'])->name('cart');
+    Route::get('/cart/finish', [Cart_controller::class, 'finish_order'])->name('cart.finish');
+    Route::post('/product/add', [Cart_controller::class, 'add_to_cart'])->name('cart.add');
+});
 
 Route::middleware(['auth', Admin_check::class])->prefix('admin')->group(function() {
     // ===== PRODUCT
